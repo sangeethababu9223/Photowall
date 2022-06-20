@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Title from "./title";
 import PhotoWall from "./photowall";
+import AddPhoto from "./addphoto";
 class Main extends Component {
     constructor() {
         super();
@@ -18,22 +19,30 @@ class Main extends Component {
             id: "2",
             description: "On a vacation!",
             imageLink: "https://fm.cnbc.com/applications/cnbc.com/resources/img/editorial/2017/08/24/104670887-VacationExplainsTHUMBWEB.1910x1000.jpg"
-            }]
+            }],
+            screen: 'photos'
         }
         this.removePhoto = this.removePhoto.bind(this);
+        this.navigate = this.navigate.bind(this);
     }
     render() {
       return <div>
-        <Title titletext={"PhotoWall here"}/>
-        <PhotoWall posts = {this.state.posts} onRemovephoto={this.removePhoto} />
+        {
+          this.state.screen === 'photos' && (
+          <div>
+            <Title titletext={"PhotoWall here"}/>
+            <PhotoWall posts = {this.state.posts} onRemovephoto={this.removePhoto} onNavigate={this.navigate} />
+          </div>
+          )
+        }
+        {
+          this.state.screen === 'addPhoto' && (
+            <div>
+              <AddPhoto/>
+            </div>
+          )
+        }
       </div>
-    }
-    // componentDidMount() {
-      
-    // }
-    componentDidUpdate(PrevProps, PrevState){
-      console.log(PrevState.posts);
-      console.log(this.state);
     }
     removePhoto(postRemoved) {
       this.setState(state => {
@@ -41,6 +50,11 @@ class Main extends Component {
           posts: state.posts.filter(post => post !== postRemoved)
         }
       });
+    }
+    navigate() {
+      this.setState({
+        screen : 'addPhoto' 
+      })
     }
   }
 

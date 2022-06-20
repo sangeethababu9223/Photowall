@@ -2,8 +2,12 @@ import React from "react";
 import Photo from "./photo";
 import propTypes from "prop-types";
 function PhotoWall(props) {
-        return <div className="photoGrid">
-            {props.posts.map((post, index) => <Photo key={index} post={post} onRemovephoto={props.onRemovephoto}/>)}
+        return <div>
+            <a href="#addPhoto" className="addIcon" onClick={props.onNavigate} ></a>
+            {/* <button className="addIcon" onClick={props.onNavigate}> </button> */}
+            <div className="photoGrid">
+                {props.posts.map((post, index) => <Photo key={index} post={post} onRemovephoto={props.onRemovephoto}/>)}
+            </div>
         </div>
 }
 // class PhotoWall extends Component {
