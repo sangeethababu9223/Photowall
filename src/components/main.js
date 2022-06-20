@@ -20,7 +20,7 @@ const posts = [{
 class Main extends Component {
     render() {
       return <div>
-        <Title titletext={"PhotoWall"}/>
+        <Title titletext={"PhotoWall here"}/>
         <PhotoWall posts = {posts}/>
       </div>
     }
