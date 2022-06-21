@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Title from "./title";
 import PhotoWall from "./photowall";
 import AddPhoto from "./addphoto";
-import { Routes,Route } from "react-router-dom";
+import { Routes,Route,useNavigate } from "react-router-dom";
 class Main extends Component {
     constructor() {
         super();
@@ -21,19 +21,21 @@ class Main extends Component {
             description: "On a vacation!",
             imageLink: "https://fm.cnbc.com/applications/cnbc.com/resources/img/editorial/2017/08/24/104670887-VacationExplainsTHUMBWEB.1910x1000.jpg"
             }],
-            screen: 'photos'
         }
         this.removePhoto = this.removePhoto.bind(this);
-        this.navigate = this.navigate.bind(this);
+        this.addphoto = this.addphoto.bind(this);
     }
     render() {
       return <div>
-        <Routes>
+        <Routes >
           <Route exact path="/" element={<div>
               <Title titletext={"PhotoWall here"}/>
-              <PhotoWall posts = {this.state.posts} onRemovephoto={this.removePhoto} onNavigate={this.navigate} />
+              <PhotoWall posts = {this.state.posts} onRemovephoto={this.removePhoto} />
             </div>}/>
-          <Route exact path="/addPhoto" element={<AddPhoto/>} />
+          <Route exact path="/addPhoto" element={<div><AddPhoto onAddPhoto={(postSubmit) =>{
+              this.addphoto(postSubmit);
+              this.props.navigate('/');
+            }} /></div>} />
         </Routes>
       </div>
     }
@@ -44,11 +46,17 @@ class Main extends Component {
         }
       });
     }
-    navigate() {
-      this.setState({
-        screen : 'addPhoto' 
-      })
+    addphoto(postSubmitted) {
+      this.setState(state => {
+        return {
+          posts: state.posts.concat([postSubmitted])
+        }
+      });
     }
   }
 
-export default Main;
+  function MainComp(props) {
+    return <Main  {...props} navigate={useNavigate()}/>
+  }
+
+  export default MainComp;

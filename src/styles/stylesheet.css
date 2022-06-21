@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
-html {
+
+   html {
     font-size: 10px;
     font-family: sans-serif;
    }
@@ -8,7 +9,7 @@ html {
     line-height: 1.5;
    }
    h1 {
-    font-family: billabong, ''Roboto', sans-serif;';
+    font-family: 'Roboto', sans-serif;;
     text-align: center;
     font-weight: 100;
     font-size: 13rem;
