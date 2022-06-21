@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Title from "./title";
 import PhotoWall from "./photowall";
 import AddPhoto from "./addphoto";
+import { Routes,Route } from "react-router-dom";
 class Main extends Component {
     constructor() {
         super();
@@ -27,21 +28,13 @@ class Main extends Component {
     }
     render() {
       return <div>
-        {
-          this.state.screen === 'photos' && (
-          <div>
-            <Title titletext={"PhotoWall here"}/>
-            <PhotoWall posts = {this.state.posts} onRemovephoto={this.removePhoto} onNavigate={this.navigate} />
-          </div>
-          )
-        }
-        {
-          this.state.screen === 'addPhoto' && (
-            <div>
-              <AddPhoto/>
-            </div>
-          )
-        }
+        <Routes>
+          <Route exact path="/" element={<div>
+              <Title titletext={"PhotoWall here"}/>
+              <PhotoWall posts = {this.state.posts} onRemovephoto={this.removePhoto} onNavigate={this.navigate} />
+            </div>}/>
+          <Route exact path="/addPhoto" element={<AddPhoto/>} />
+        </Routes>
       </div>
     }
     removePhoto(postRemoved) {
