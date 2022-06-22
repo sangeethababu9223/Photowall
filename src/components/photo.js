@@ -30,7 +30,6 @@ function Photo(props) {
 
 Photo.propTypes = {
     post: propTypes.object.isRequired,
-    onRemovephoto: propTypes.func.isRequired
 }
 
 export default Photo;
