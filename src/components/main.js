@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import Title from "./title";
 import PhotoWall from "./photowall";
 import AddPhoto from "./addphoto";
-import { Routes,Route,useNavigate,Link } from "react-router-dom";
-import { removePost } from "../redux/actions";
+import { Routes,Route,useNavigate,Link,useParams } from "react-router-dom";
+import Single from "./Single";
 class Main extends Component {
     render() {
       return <div>
@@ -17,13 +16,15 @@ class Main extends Component {
               <PhotoWall {...this.props} />
             </div>}/>
           <Route exact path="/addPhoto" element={<AddPhoto {...this.props}/>} />
+          <Route path="/single/:id" element={<Single {...this.props.params}/>} />
         </Routes>
       </div>
     }
   }
 
   function MainComp(props) {
-    return <Main  {...props} navigate={useNavigate()}/>
+    const params = useParams();
+    return <Main  {...props} navigate={useNavigate()} params={params}/>
   }
 
   export default MainComp;
