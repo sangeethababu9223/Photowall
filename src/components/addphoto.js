@@ -14,13 +14,13 @@ class AddPhoto extends Component {
             imageLink: link
         }
         if(description && link) {
-            this.props.onAddPhoto(post);
+            this.props.addPost(post);
+            this.props.navigate('/');
         }
     }
     render() {
         return (
             <div>
-                <h1>Here Goes add Page</h1>
                 <div className="form">
                     <form onSubmit={this.handleSubmit}>
                         <input type="text" placeholder="Link" name="link"/>

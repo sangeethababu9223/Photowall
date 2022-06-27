@@ -1,6 +1,13 @@
 export function removePost(index) {
     return {
-        type: 'REMOVE_POST',
-        index: index
+        index,
+        type: 'REMOVE_POST'
+    }
+}
+
+export function addPost(post) {
+    return {
+        post,
+        type: 'ADD_POST'
     }
 }
