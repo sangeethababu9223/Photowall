@@ -6,10 +6,12 @@ function Single(props) {
     let { id } = useParams(); 
     id = Number(id);
     const posts = props.posts;
-    const post = posts.find(post => post.id ===id )
+    const post = posts.find(post => post.id === id );
+    const comments = props.comments[id] || [];
+    const index = posts.findIndex(post =>  post.id === id)
     return <div className="single-photo">
-        <Photo post={post} />
-        <Comments />
+        <Photo post={post} {...props} index={index} />
+        <Comments addComment= {props.addComment} comments={comments} id={id} />
     </div>
 }
 

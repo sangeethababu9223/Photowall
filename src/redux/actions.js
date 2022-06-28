@@ -11,3 +11,11 @@ export function addPost(post) {
         type: 'ADD_POST'
     }
 }
+
+export function addComment(comment,postId) {
+    return {
+        postId,
+        comment,
+        type: 'ADD_COMMENT'
+    }
+}
