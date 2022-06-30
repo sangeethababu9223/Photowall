@@ -1,14 +1,30 @@
 import { database } from "../database/config";
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, set, child, get } from "firebase/database";
 
+const db = getDatabase();
 export function startAddingPost(post) {
-    const db = getDatabase();
     return (dispatch) => {
         return set(ref(db, `posts/${post.id}`), {
             ...post
           }).then(()=> {
-            dispatch(addPost(post))
+            dispatch(addPost(post));
+        }).catch((error) => {
+            console.log(error);
         })
+    }
+}
+export function startLoadingPosts () {
+    return (dispatch) => {
+        const dbRef = ref(db);
+          return get(child(dbRef, `posts`)).then((snapshot) => {
+            let posts =[];
+            snapshot.forEach((childSnapshot) => {
+                posts.push(childSnapshot.val());
+            });
+            dispatch(loadPosts(posts));
+          }).catch((error) => {
+            console.error(error);
+          });
     }
 }
 export function removePost(index) {
@@ -22,6 +38,13 @@ export function addPost(post) {
     return {
         post,
         type: 'ADD_POST'
+    }
+}
+
+export function loadPosts(posts) {
+    return {
+        posts,
+        type: 'LOAD_POSTS'
     }
 }
 
