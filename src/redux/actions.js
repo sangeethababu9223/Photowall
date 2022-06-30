@@ -1,8 +1,12 @@
-import { database } from "../database/config"
+import { database } from "../database/config";
+import { getDatabase, ref, set } from "firebase/database";
 
 export function startAddingPost(post) {
+    const db = getDatabase();
     return (dispatch) => {
-        return database.ref('posts').update({[post.id]: post}).then(()=> {
+        return set(ref(db, `posts/${post.id}`), {
+            post
+          }).then(()=> {
             dispatch(addPost(post))
         })
     }
