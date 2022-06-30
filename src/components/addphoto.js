@@ -14,7 +14,7 @@ class AddPhoto extends Component {
             imageLink: link
         }
         if(description && link) {
-            this.props.addPost(post);
+            this.props.startAddingPost(post);
             this.props.navigate('/');
         }
     }
