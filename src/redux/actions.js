@@ -5,7 +5,7 @@ export function startAddingPost(post) {
     const db = getDatabase();
     return (dispatch) => {
         return set(ref(db, `posts/${post.id}`), {
-            post
+            ...post
           }).then(()=> {
             dispatch(addPost(post))
         })
