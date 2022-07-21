@@ -1,4 +1,4 @@
-import { database } from "../database/config";
+// import { database } from "../database/config";
 import { getDatabase, ref, set, child, get } from "firebase/database";
 
 const db = getDatabase();
